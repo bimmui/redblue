@@ -1,0 +1,128 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Team Stats</title>
+    <meta name="description" content="Check out the current standings of the teams and their social media pages!">
+    <meta name="og:title" property="og:title" content="Team Stats">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=0.84">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'stats.css' %}">
+
+</head>
+
+
+<div class="container">
+    <div class="bigWrapper">
+        <div class="donutWrapper">
+            <div class="donutTarget donut"></div>
+        </div>
+        <div class="legendWrapper">
+            <ul class="donutTarget legend">
+                <li>
+                    <em>Red Team <i class="fa-brands fa-tiktok redtiktok"></i></em>
+                    <span>{{ redvotes }}</span>
+                </li>
+                <li>
+                    <em>Undecided</em>
+                    <span>{{ undecided }}</span>
+                </li>
+                <li>
+                    <em>Blue Team <i class="fa-brands fa-tiktok bluetiktok"></i></em>
+                    <span>{{ bluevotes }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    /*
+
+The entirety of this script was first created by Eric Sadowski:
+https://codepen.io/ejsado/
+
+I've only messed with the HTML *a little* and the CSS quite a bit to make things more responsive.
+
+*/
+
+    function chunkSize(dataNum, dataTotal) {
+        return (dataNum / dataTotal) * 360;
+    }
+
+    function addChunk(chunkSize, donutElement, offset, chunkID, color) {
+        $(donutElement).append("<div class='chunk " + chunkID + "'><span><\/span><\/div>");
+        var offset = offset - 1;
+        var sizeRotation = -179 + chunkSize;
+        $("." + chunkID).css({
+            "transform": "rotate(" + offset + "deg) translate3d(0,0,0)"
+        });
+        $("." + chunkID + " span").css({
+            "transform": "rotate(" + sizeRotation + "deg) translate3d(0,0,0)",
+            "background-color": color
+        });
+    }
+
+    function iterateChunks(chunkSize, donutElement, offset, dataCount, chunkCount, color) {
+        var chunkID = "s" + dataCount + "-" + chunkCount;
+        var maxSize = 179;
+        if (chunkSize <= maxSize) {
+            addChunk(chunkSize, donutElement, offset, chunkID, color);
+        } else {
+            addChunk(maxSize, donutElement, offset, chunkID, color);
+            iterateChunks(chunkSize - maxSize, donutElement, offset + maxSize, dataCount, chunkCount + 1, color);
+        }
+    }
+
+    function createDonut(dataElement, donutElement) {
+        var listData = [];
+        $(dataElement + " span").each(function () {
+            listData.push(Number($(this).html()));
+        });
+        var listTotal = 0;
+        for (var i = 0; i < listData.length; i++) {
+            listTotal += listData[i];
+        }
+        var offset = 0;
+        var color = [
+            "#FF5252",
+            "#E6E6FA",
+            "#6495ED",
+        ];
+        for (var i = 0; i < listData.length; i++) {
+            var size = chunkSize(listData[i], listTotal);
+            iterateChunks(size, donutElement, offset, i, 0, color[i]);
+            $(dataElement + " li:nth-child(" + (i + 1) + ")").css("border-color", color[i]);
+            offset += size;
+        }
+    }
+    createDonut(".donutTarget.legend", ".donutTarget.donut");
+</script>
+
+<script>
+    $(document).ready(function(){
+        $(".redtiktok").click(function(){
+            window.location.href = "#"
+        });
+     });
+</script>
+<script>
+    $(document).ready(function(){
+        $(".bluetiktok").click(function(){
+            window.location.href = "#"
+        });
+     });
+</script>
+
+</html>

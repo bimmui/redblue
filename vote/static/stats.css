@@ -1,0 +1,139 @@
+@keyframes makeDonut {
+    from {
+      transform: rotate(0deg) translate3d(0, 0, 0);
+    }
+  }
+  body {
+    font-family: Arial;
+    background: #3c3a3f;
+    margin: 0 auto;
+    display: flex;
+  }
+  .bigWrapper {
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .donutTarget {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .donut {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    margin: 0 15% 15% 0;
+  }
+  .donut::before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1;
+    width: 50%;
+    height: 50%;
+    background: #3c3a3f;
+    border-radius: 50%;
+    top: 25%;
+    left: 25%;
+  }
+  .donut::after {
+    content: "";
+    display: block;
+    width: 60%;
+    height: 1%;
+    border-radius: 50%;
+    box-shadow: 0 0 1.5% 2% rgba(0, 0, 0, 0.1);
+    margin: 110% auto;
+  }
+  
+  /*
+  Change this width and height to determine the size of the donut. DIV MUST BE SQUARE unless you want to see some crazy stuff.
+  */
+  
+  .donutWrapper {
+    width: 70vw;
+    height: 70vw;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    float: left;
+  }
+  
+  /*
+  Mess with the media queries to see how things look on different device screens and viewports. I just have some example queries set up:
+  */
+  
+  @media screen and (min-width: 1000px) {
+    .donutWrapper {
+      width: 80vh;
+      height: 80vh;
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    .donutWrapper {
+      width: 55vh;
+      height: 55vh;
+    }
+  }
+  @media screen and (min-height: 1000px) {
+    .donutWrapper {
+      width: 32vh;
+      height: 32vh;
+    }
+  }
+  .legendWrapper {
+    display: block;
+    margin: 20px;
+    float: right;
+  }
+  .chunk {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(50% 50%, 100% 0%, 0% 0%, 0% 100%);
+    animation: makeDonut 1s;
+  }
+  .chunk span {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    clip-path: polygon(50% 50%, 100% 0%, 0% 0%, 0% 100%);
+  }
+  .legend {
+    list-style-type: none;
+    padding: 0;
+    background: #616063;
+    padding: 15px;
+    font-size: 20px;
+    color: #ffffff;
+    box-shadow: 1px 1px 0 #2c2c2d, 2px 2px 0 #2c2c2d;
+    float: left;
+  }
+  .legend li {
+    width: 250px;
+    height: 1.25em;
+    margin-bottom: 0.7em;
+    padding-left: 0.5em;
+    border-left: 1.25em solid black;
+  }
+  .legend em {
+    font-style: normal;
+  }
+  .legend span {
+    float: right;
+  }
+  p {
+    color: white;
+    clear: both;
+  }
+  
