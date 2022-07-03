@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'redblue.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dabf5pfgnhs2ob', 
+        'USER': 'kmfkymevpqzgda', 
+        'PASSWORD': 'dbec59daff90dc0bb974eeadec976624efebc9739b4e37666baaf925eb2e5c77',
+        'HOST': 'ec2-52-3-60-53.compute-1.amazonaws.com', 
+        'PORT': '5432',
     }
 }
 
