@@ -114,6 +114,14 @@ body {
     font-size: 68.5%;
 }
 
+.logo{
+    display: inline;
+    position: absolute;
+    top: 10%;
+    left: 48%;
+    text-align: center;
+  }
+
 a {
     text-transform: uppercase;
     font-size: .6rem;
