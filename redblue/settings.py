@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&eep95o-1eh$xle8ei-59ctog8umtewo9^et!f&3c6(7-32as0'
+SECRET_KEY = 'secret key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'redblue.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dabf5pfgnhs2ob', 
-        'USER': 'kmfkymevpqzgda', 
-        'PASSWORD': 'dbec59daff90dc0bb974eeadec976624efebc9739b4e37666baaf925eb2e5c77',
-        'HOST': 'ec2-52-3-60-53.compute-1.amazonaws.com', 
+        'NAME': 'db name', 
+        'USER': 'user info', 
+        'PASSWORD': 'db password',
+        'HOST': 'db host', 
         'PORT': '5432',
     }
 }
